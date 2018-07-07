@@ -40,6 +40,11 @@ int Slot::getCurrent()
     return _current;
 }
 
+vector<int> Slot::getEmployees()
+{
+    return _assignedToSlot;
+}
+
 void Slot::setID(int newId)
 {
     _id = newId;

@@ -41,6 +41,7 @@ public:
     int getMin();
     int getCapacity();
     int getCurrent();
+    vector<int> getEmployees();
     void setID(int newId);
     void setStart(double newStart);
     void setEnd(double newEnd);
