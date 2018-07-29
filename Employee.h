@@ -22,13 +22,16 @@ private:
     int _minHours;
     int _maxHours;
 public:
+    Employee(){
+    }
     Employee(int id, string name, int min, int max){
         _id = id;
         _name = name;
         _minHours = min;
         _maxHours = max;
-        _availability = new int[MAX_SLOTS];
         _assigned = new int[MAX_SLOTS];
+        _availability = new int[MAX_SLOTS];
+
     };
     virtual ~Employee(){
         delete [] _availability;
