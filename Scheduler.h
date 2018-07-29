@@ -2,7 +2,19 @@
 #include "Schedule.h"
 #include "Employee.h"
 
-using std::string;
+#include <CelModel.h>
+#include <CelNumVar.h>
+#include <CelIntVar.h>
+#include <CelBoolVar.h>
+#include <CelNumVarArray.h>
+#include <CelBoolVarArray.h>
+
+#include "CbcModel.hpp"
+#include "OsiClpSolverInterface.hpp"
+#include "OsiCbcSolverInterface.hpp"
+
+using namespace std;
+using namespace rehearse;
 
 #define MAX_SLOTS 100
 #define MAX_EMPLOYEES 100
