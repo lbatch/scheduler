@@ -34,14 +34,14 @@ public:
     };
     virtual ~Slot(){
     };
-    int getId();
-    double getStart();
-    double getEnd();
-    int getDay();
-    int getMin();
-    int getCapacity();
-    int getCurrent();
-    vector<int> getEmployees();
+    const int getId();
+    const double getStart();
+    const double getEnd();
+    const int getDay();
+    const int getMin();
+    const int getCapacity();
+    const int getCurrent();
+    const vector<int> getEmployees();
     void setID(int newId);
     void setStart(double newStart);
     void setEnd(double newEnd);
@@ -49,7 +49,7 @@ public:
     void setCapacity(int newCapacity);
     void addToSlot(int e);
     void removeFromSlot(int e);
-    void displayEmployees();
+    const void displayEmployees();
 };
 
 #endif

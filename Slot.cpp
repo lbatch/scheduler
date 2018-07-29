@@ -1,46 +1,46 @@
 #include "Slot.h"
 
-int Slot::getId()
+const int Slot::getId()
 {
     return _id;
 }
 
 // start time of slot
-double Slot::getStart()
+const double Slot::getStart()
 {
     return _start;
 }
 
 // end time of slot
-double Slot::getEnd()
+const double Slot::getEnd()
 {
     return _end;
 }
 
-int Slot::getDay()
+const int Slot::getDay()
 {
     return _day;
 }
 
 // number of employees needed for slot
-int Slot::getMin()
+const int Slot::getMin()
 {
     return _min;
 }
 
 // number of employees allowed for slot
-int Slot::getCapacity()
+const int Slot::getCapacity()
 {
     return _capacity;
 }
 
 // current number of employees scheduled in slot
-int Slot::getCurrent()
+const int Slot::getCurrent()
 {
     return _current;
 }
 
-vector<int> Slot::getEmployees()
+const vector<int> Slot::getEmployees()
 {
     return _assignedToSlot;
 }
@@ -89,7 +89,7 @@ void Slot::removeFromSlot(int e)
     }
 }
 
-void Slot::displayEmployees()
+const void Slot::displayEmployees()
 {
     for(auto emp : _assignedToSlot)
     {

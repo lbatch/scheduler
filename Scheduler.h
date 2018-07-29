@@ -14,17 +14,14 @@ class Scheduler
 {
 private:
     Schedule _schedule;
-    Employee * _employeeAvail;
+    vector <Employee>  _employeeAvail;
 public:
-    Scheduler(Schedule sched){
+    Scheduler(Schedule sched)
+    {
         _schedule = sched;
-        _employeeAvail = new Employee[MAX_EMPLOYEES];
     };
     virtual ~Scheduler(){
-        delete [] _employeeAvail;
     };
-    void displaySchedule();
-    void displayEmployees();
     void addEmployee(Employee e);
     void removeEmployee(Employee e);
     void assignSchedule();

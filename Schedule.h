@@ -1,7 +1,12 @@
 #include <string>
 #include "Slot.h"
+#include <vector>
+#include <iostream>
 
 using std::string;
+using std::vector;
+using std::cout;
+using std::endl;
 
 #define MAX_SLOTS 100
 
@@ -11,24 +16,24 @@ using std::string;
 class Schedule
 {
 private:
-    int _scheduleID;
+    int _id;
     string * _days;
     string _scheduleName;
-    Slot * _slots;
+    vector <Slot> _slots;
 public:
-    Schedule(int id, string name, string* days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}){
-        _scheduleID = id;
+    Schedule() {
+    }
+    Schedule(int id, string name, string* days){
+        _id = id;
         _scheduleName = name;
-        _slots = new Slot[MAX_SLOTS];
         _days = days;
     };
     virtual ~Schedule(){
-        delete [] _slots;
         delete [] _days;
     };
-    int getId();
-    string getName();
-    int getDay(int idx);
+    const int getId();
+    const string getName();
+    const string getDay(int idx);
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();
