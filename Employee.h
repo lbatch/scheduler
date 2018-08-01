@@ -6,7 +6,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-#define MAX_SLOTS 100
+#define MAX_SLOTS 10
 
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
@@ -16,8 +16,8 @@ class Employee
 private:
     int _id;
     string _name;
-    int * _availability;
-    int * _assigned;
+    int _availability[MAX_SLOTS];
+    int _assigned[MAX_SLOTS];
     int _hoursAssigned;
     int _minHours;
     int _maxHours;
@@ -29,17 +29,17 @@ public:
         _name = name;
         _minHours = min;
         _maxHours = max;
-        _assigned = new int[MAX_SLOTS];
-        _availability = new int[MAX_SLOTS];
+        _assigned;
+        _availability;
 
     };
     virtual ~Employee(){
-        delete [] _availability;
-        delete [] _assigned;
     };
-    int getId();
-    string getName();
-    int getHours();
+    const int getId();
+    const string getName();
+    const int getHours();
+    const int getMin();
+    const int getMax();
     bool checkAvailable(int slot);
     bool checkAssigned(int slot);
     void setId(int newId);

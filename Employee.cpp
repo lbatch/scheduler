@@ -1,18 +1,28 @@
 #include "Employee.h"
 
-int Employee::getId()
+const int Employee::getId()
 {
     return _id;
 }
 
-string Employee::getName()
+const string Employee::getName()
 {
     return _name;
 }
 
-int Employee::getHours()
+const int Employee::getHours()
 {
     return _hoursAssigned;
+}
+
+const int Employee::getMin()
+{
+    return _minHours;
+}
+
+const int Employee::getMax()
+{
+    return _maxHours;
 }
 
 bool Employee::checkAvailable(int slot)
