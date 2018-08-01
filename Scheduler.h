@@ -16,8 +16,8 @@
 using namespace std;
 using namespace rehearse;
 
-#define MAX_SLOTS 100
-#define MAX_EMPLOYEES 100
+#define MAX_SLOTS 10
+#define MAX_EMPLOYEES 10
 
 #ifndef SCHEDULER_H
 #define SCHEDULER_H

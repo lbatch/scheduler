@@ -14,6 +14,11 @@ const string Schedule::getDay(int idx)
     return _days[idx];
 }
 
+const vector <Slot> Schedule::getSlots()
+{
+    return _slots;
+}
+
 void Schedule::setName(string newName)
 {
     _scheduleName = newName;
