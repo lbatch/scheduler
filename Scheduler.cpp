@@ -45,6 +45,14 @@ void Scheduler::assignSchedule()
         }
     }
 
+        for(int i = 0; i<E; i++)
+    {
+        for(int j = 0; j<S; j++)
+        {
+            model.addConstraint(-1 <= 0 - x[i][j]);
+        }
+    }
+
     for(int i = 0; i<E; i++)
     {
         CelExpression numHours;
