@@ -8,7 +8,7 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-#define MAX_SLOTS 100
+#define MAX_SLOTS 10
 
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
@@ -29,11 +29,11 @@ public:
         _days = days;
     };
     virtual ~Schedule(){
-        delete [] _days;
     };
     const int getId();
     const string getName();
     const string getDay(int idx);
+    const vector<Slot> getSlots();
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();

@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/coin-Rehearse/CoinUtils/src"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
