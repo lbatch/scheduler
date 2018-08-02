@@ -1,5 +1,10 @@
 #include "Scheduler.h"
 
+Schedule Scheduler::getSchedule()
+{
+    return _schedule;
+}
+
 void Scheduler::addEmployee(Employee e)
 {
    _employeeAvail.push_back(e);
@@ -85,6 +90,11 @@ void Scheduler::assignSchedule()
         for(int j = 0; j<S; j++)
         {
             double x_i_j_value = model.getSolutionValue(x[i][j]);
+            if(x_i_j_value)
+            {
+                _schedule.addEmployeeToSlot(i,j);
+                _employeeAvail[i].addAssigned(j);
+            }
             printf("Solution for x_%d_%d : %g\n", i, j, x_i_j_value);
         }
     }

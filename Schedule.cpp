@@ -36,6 +36,11 @@ void Schedule::addSlot(Slot newSlot)
     }
 }
 
+void Schedule::addEmployeeToSlot(int e, int s)
+{
+    _slots[s].addToSlot(e);
+}
+
 void Schedule::display()
 {
     for (auto slot: _slots)

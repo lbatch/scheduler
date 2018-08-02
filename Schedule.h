@@ -1,5 +1,6 @@
 #include <string>
 #include "Slot.h"
+#include "Employee.h"
 #include <vector>
 #include <iostream>
 
@@ -37,6 +38,7 @@ public:
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();
+    void addEmployeeToSlot(int empId, int slotId);
 };
 
 #endif

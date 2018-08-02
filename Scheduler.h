@@ -34,6 +34,7 @@ public:
     };
     virtual ~Scheduler(){
     };
+    Schedule getSchedule();
     void addEmployee(Employee e);
     void removeEmployee(Employee e);
     void assignSchedule();

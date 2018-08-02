@@ -124,4 +124,7 @@ int main()
 
     scheduler.assignSchedule();
 
+    Schedule newSched = scheduler.getSchedule();
+    newSched.display();    
+
 }
