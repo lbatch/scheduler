@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include "Slot.h"
 
 using std::string;
 using std::cout;
@@ -17,8 +16,6 @@ private:
     int _id;
     string _name;
     int _availability[MAX_SLOTS];
-    int _assigned[MAX_SLOTS];
-    int _hoursAssigned;
     int _minHours;
     int _maxHours;
 public:
@@ -29,7 +26,6 @@ public:
         _name = name;
         _minHours = min;
         _maxHours = max;
-        _assigned;
         _availability;
 
     };
@@ -37,20 +33,15 @@ public:
     };
     const int getId();
     const string getName();
-    const int getHours();
     const int getMin();
     const int getMax();
     bool checkAvailable(int slot);
-    bool checkAssigned(int slot);
     void setId(int newId);
     void setName(string newName);
     void setMin(int min);
     void setMax(int max);
     void addAvailability(int slot);
     void removeAvailability(int slot);
-    void addAssigned(int slot);
-    void removeAssigned(int slot);
-    void displaySchedule();
 };
 
 #endif

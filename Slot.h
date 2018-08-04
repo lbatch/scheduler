@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 
+#include "Employee.h"
+
 using std::string;
 using std::vector;
 using std::cout;
@@ -21,7 +23,7 @@ private:
     int _min;
     int _capacity;
     int _current;
-   vector<int>  _assignedToSlot;
+   vector<Employee>  _assignedToSlot;
 public:
     Slot(int id, double start, double end, int day, int min, int capacity){
         _id = id;
@@ -41,14 +43,14 @@ public:
     const int getMin();
     const int getCapacity();
     const int getCurrent();
-    const vector<int> getEmployees();
+    const vector<Employee> getEmployees();
     void setID(int newId);
     void setStart(double newStart);
     void setEnd(double newEnd);
     void setMin(int newMin);
     void setCapacity(int newCapacity);
-    void addToSlot(int e);
-    void removeFromSlot(int e);
+    void addToSlot(Employee e);
+    void removeFromSlot(Employee e);
     const void displayEmployees();
 };
 
