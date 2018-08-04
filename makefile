@@ -10,7 +10,7 @@ LIBS = -lrehearse -lCbc -lCbcSolver -lCgl -lClp -lClpSolver -lCoinUtils -lOsi -l
 SRCS = Employee.cpp Schedule.cpp Scheduler.cpp Slot.cpp testMain.cpp
 MAIN = testMain
 
-.PHONY: depend clean
+.PHONY: clean
 
 all: $(MAIN)
 
@@ -18,8 +18,4 @@ $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
 
 clean:
-	$(RM) *.0 *~ $(MAIN)
-
-depend: $(SRCS)
-	makedepend $(INCLUDES) $^
-
+	$(RM) *.o *~ $(MAIN)
