@@ -38,7 +38,7 @@ public:
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();
-    void addEmployeeToSlot(int empId, int slotId);
+    void addEmployeeToSlot(Employee emp, int slotId);
 };
 
 #endif
