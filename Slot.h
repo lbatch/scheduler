@@ -25,7 +25,7 @@ private:
     int _current;
    vector<Employee>  _assignedToSlot;
 public:
-    Slot(int id, double start, double end, int day, int min, int capacity){
+    Slot(int id, int day, double start, double end, int min, int capacity){
         _id = id;
         _start = start;
         _end = end;
