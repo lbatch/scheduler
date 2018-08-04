@@ -40,7 +40,7 @@ const int Slot::getCurrent()
     return _current;
 }
 
-const vector<int> Slot::getEmployees()
+const vector<Employee> Slot::getEmployees()
 {
     return _assignedToSlot;
 }
@@ -70,18 +70,18 @@ void Slot::setCapacity(int newCapacity)
     _capacity = newCapacity;
 }
 
-void Slot::addToSlot(int e)
+void Slot::addToSlot(Employee e)
 {
     assert(_current < _capacity);
     _assignedToSlot.push_back(e);
     _current++;
 }
 
-void Slot::removeFromSlot(int e)
+void Slot::removeFromSlot(Employee e)
 {
     for(int i = 0; i < _current; i++)
     {
-        if(_assignedToSlot[i] == e)
+        if(_assignedToSlot[i].getId() == e.getId())
         {
             _assignedToSlot.erase(_assignedToSlot.begin() + i);
             _current--;
@@ -93,7 +93,7 @@ const void Slot::displayEmployees()
 {
     for(auto emp : _assignedToSlot)
     {
-        cout << emp << ' ';
+        cout << emp.getId() << ": " << emp.getName() << endl;
     }
     cout << endl;
 }
