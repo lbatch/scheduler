@@ -92,8 +92,7 @@ void Scheduler::assignSchedule()
             double x_i_j_value = model.getSolutionValue(x[i][j]);
             if(x_i_j_value)
             {
-                _schedule.addEmployeeToSlot(i,j);
-                _employeeAvail[i].addAssigned(j);
+                _schedule.addEmployeeToSlot(_employeeAvail[i],j);
             }
             printf("Solution for x_%d_%d : %g\n", i, j, x_i_j_value);
         }

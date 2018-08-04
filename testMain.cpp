@@ -7,14 +7,14 @@ int main()
 {
     Slot s0(0, 1, 2, 1, 2, 3);
     Slot s1(1, 2, 3, 1, 2, 3);
-    Slot s2(2, 3, 5, 1, 2, 3);
-    Slot s3(3, 5, 7, 1, 2, 3);
-    Slot s4(4, 7, 8, 1, 2, 3);
+    Slot s2(2, 3, 4, 1, 2, 3);
+    Slot s3(3, 4, 5, 1, 2, 3);
+    Slot s4(4, 5, 6, 1, 2, 3);
     Slot s5(5, 1, 2, 2, 2, 3);
     Slot s6(6, 2, 3, 2, 2, 3);
-    Slot s7(7, 3, 5, 2, 2, 3);
-    Slot s8(7, 5, 6, 2, 2, 3);
-    Slot s9(7, 6, 8, 2, 2, 3);
+    Slot s7(7, 3, 4, 2, 2, 3);
+    Slot s8(7, 4, 5, 2, 2, 3);
+    Slot s9(7, 5, 6, 2, 2, 3);
 
     string days[7] = {"Sunday", "Monday", "Tuesday",
         "Wednesday", "Thursday", "Friday", "Saturday"};
