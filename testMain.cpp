@@ -3,19 +3,32 @@
 #include "Schedule.h"
 #include "Scheduler.h"
 
-vector<Slot> getSlots()
+vector<Slot> getSlots(vector <string> days)
 {
+    int startTime;
+    int endTime;
+    int ePerS;
+    int slotId = 0;
+
     vector<Slot> slots;
-    slots.push_back(Slot(0, 1, 2, 1, 2, 3));
-    slots.push_back(Slot(1, 2, 3, 1, 2, 3));
-    slots.push_back(Slot(2, 3, 4, 1, 2, 3));
-    slots.push_back(Slot(3, 4, 5, 1, 2, 3));
-    slots.push_back(Slot(4, 5, 6, 1, 2, 3));
-    slots.push_back(Slot(5, 1, 2, 2, 2, 3));
-    slots.push_back(Slot(6, 2, 3, 2, 2, 3));
-    slots.push_back(Slot(7, 3, 4, 2, 2, 3));
-    slots.push_back(Slot(8, 4, 5, 2, 2, 3));
-    slots.push_back(Slot(9, 5, 6, 2, 2, 3));
+    cout << "Currently, all days must have the same scheduler with the same number of one-hour slots." << endl << endl;
+    cout << "What is the start time of your daily schedule? ";
+    cin >> startTime;
+
+    cout << "What is the end time of your daily schedule? ";
+    cin >> endTime;
+
+    cout << "How many employees do you need for each slot? ";
+    cin >> ePerS;
+
+    for(int d = 0; d < days.size(); d++)
+    {
+        for(int t = startTime; t < endTime; t++)
+        {
+            slots.push_back(Slot(slotId, d, t, t+1, ePerS, ePerS));
+            slotId++;
+        }
+    }
 
     return slots;
 }
@@ -165,7 +178,6 @@ vector<string> getDays()
         cout << "6: Friday" << endl;
         cout << "7: Saturday" << endl;
         cin >> startDay;
-        cout << startDay;
 
         if(startDay < 1 || startDay > 7)
         {
@@ -186,7 +198,7 @@ Scheduler input()
     cout << "Welcome to Employee Scheduler!" << endl << endl;
 
     vector<string> days = getDays();
-    vector <Slot> slots = getSlots();
+    vector <Slot> slots = getSlots(days);
     vector <Employee> employees = getEmployees();
 
     Scheduler scheduler = setUp("Schedule", days, slots, employees);
@@ -197,7 +209,6 @@ Scheduler input()
 
 int main()
 {
-
     Scheduler scheduler = input();
 
     scheduler.assignSchedule();
