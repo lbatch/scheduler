@@ -117,26 +117,92 @@ vector<Employee> getEmployees()
     return emps;
 }
 
-Scheduler setUp(string name, string* days, vector<Slot> slots, vector <Employee> emps) {
+Scheduler setUp(string name, vector<string> days, vector<Slot> slots, vector <Employee> emps) {
     Schedule schedule(0, name, days, slots);
     Scheduler scheduler(schedule, emps);
 
     return scheduler;
 }
 
-int main()
+
+vector<string> assignDays(int start, int num)
 {
-    string days[7] = {"Sunday", "Monday", "Tuesday",
+    vector<string> days;
+    string week[7] = {"Sunday", "Monday", "Tuesday",
         "Wednesday", "Thursday", "Friday", "Saturday"};
+
+    for(int i = 0; i < num; i++)
+    {
+        int dayOf = start + i -1;
+        if(dayOf > 6)
+        {
+            dayOf = dayOf % 7;
+        }
+
+        days.push_back(week[dayOf]);
+    }
+
+    return days;
+}
+
+vector<string> getDays()
+{
+    int numDays;
+    cout << "How many days are there on your schedule? ";
+    cin >> numDays;
+    vector<string> days;
+
+    int startDay;
+    bool invalid = true;
+    while(invalid)
+    {
+        cout << "On what day does your schedule start?" << endl;
+        cout << "1: Sunday" << endl;
+        cout << "2: Monday" << endl;
+        cout << "3: Tuesday" << endl;
+        cout << "4: Wednesday" << endl;
+        cout << "5: Thursday" << endl;
+        cout << "6: Friday" << endl;
+        cout << "7: Saturday" << endl;
+        cin >> startDay;
+        cout << startDay;
+
+        if(startDay < 1 || startDay > 7)
+        {
+            cout <<  "Invalid choice; please try again" << endl;
+        }
+        else
+        {
+            invalid = false;
+            days = assignDays(startDay, numDays);
+            return days;
+        }
+    }
     
+}
+
+Scheduler input()
+{
+    cout << "Welcome to Employee Scheduler!" << endl << endl;
+
+    vector<string> days = getDays();
     vector <Slot> slots = getSlots();
     vector <Employee> employees = getEmployees();
 
     Scheduler scheduler = setUp("Schedule", days, slots, employees);
 
+    return scheduler;
+    
+}
+
+int main()
+{
+
+    Scheduler scheduler = input();
+
     scheduler.assignSchedule();
 
     Schedule schedule = scheduler.getSchedule();
-    schedule.display();    
+    schedule.display();   
 
 }
