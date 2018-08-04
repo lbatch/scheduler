@@ -1,11 +1,11 @@
 #include <string>
 #include <iostream>
+#include <vector>
 
 using std::string;
 using std::cout;
 using std::endl;
-
-#define MAX_SLOTS 10
+using std::vector;
 
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
@@ -15,18 +15,18 @@ class Employee
 private:
     int _id;
     string _name;
-    int _availability[MAX_SLOTS];
+    vector<int> _availability;
     int _minHours;
     int _maxHours;
 public:
     Employee(){
     }
-    Employee(int id, string name, int min, int max){
+    Employee(int id, string name, int min, int max, int numSlots){
         _id = id;
         _name = name;
         _minHours = min;
         _maxHours = max;
-        _availability;
+        _availability.resize(numSlots, 0);
 
     };
     virtual ~Employee(){

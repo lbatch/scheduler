@@ -9,8 +9,6 @@ using std::vector;
 using std::cout;
 using std::endl;
 
-#define MAX_SLOTS 10
-
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
 
@@ -18,16 +16,22 @@ class Schedule
 {
 private:
     int _id;
-    string * _days;
+    vector <string> _days;
     string _scheduleName;
     vector <Slot> _slots;
 public:
     Schedule() {
     }
-    Schedule(int id, string name, string* days){
+    Schedule(int id, string name, vector <string> days){
         _id = id;
         _scheduleName = name;
         _days = days;
+    };
+    Schedule(int id, string name, vector<string> days, vector<Slot> slots){
+        _id = id;
+        _scheduleName = name;
+        _days = days;
+        _slots = slots;
     };
     virtual ~Schedule(){
     };
@@ -35,6 +39,10 @@ public:
     const string getName();
     const string getDay(int idx);
     const vector<Slot> getSlots();
+    const vector<string> getDays() {
+        return _days;
+    }
+    const int getNumSlots();
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();
