@@ -39,6 +39,9 @@ public:
     const string getName();
     const string getDay(int idx);
     const vector<Slot> getSlots();
+    const vector<string> getDays() {
+        return _days;
+    }
     const int getNumSlots();
     void setName(string newName);
     void addSlot(Slot newSlot);

@@ -41,7 +41,9 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
     string name;
     int minHrs;
     int maxHrs;
-    char resp;
+    int resp;
+    int start;
+    int end;
 
     cout << "How many employees do you want to add? ";
     cin >> numEmps;
@@ -53,7 +55,7 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
         cout << "What is the employee's name? ";
         cin.ignore();
         getline(cin, name);
-        cout << "Name is: " << name << endl;
+
         cout << "What is the minimum number of hours you want to schedule " << name << " for? ";
         cin >> minHrs;
         cout << "What is the maximum number of hours you want to schedule " << name << " for? ";
@@ -61,26 +63,37 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
 
         emps.push_back(Employee(empId, name, minHrs, maxHrs, slots.size()));
 
-        for(int s = 0; s < slots.size(); s++)
+        int s = 0;
+        while(s < slots.size())
         {
-            cout << "Is the employee available on "
-                << days[slots[s].getDay()] << " from "
-                << slots[s].getStart() << ":00 to "
-                << slots[s].getEnd() <<  ":00? " 
-                << "Type Y for yes, N for no: ";
-
-            cin.ignore();
+            int currDay = slots[s].getDay();
+            cout << "Does the employee have any availability on " << days[currDay] << "? "
+            << "1 for yes, 0 for no: ";
             cin >> resp;
 
-            switch(resp)
+            while(resp && slots[s].getDay() == currDay)
             {
-                case 'Y': case 'y':
-                    emps[e].addAvailability(slots[s].getId());
-                    break;
-                case 'N': case 'n':
-                    break;
-                default:
-                    break;
+                cout << "Enter the start time of this block of availability: ";
+                cin >> start;
+                cout <<  "Enter the end time of this block of availability: ";
+                cin >> end;
+
+                while(slots[s].getEnd() <= end && slots[s].getDay() == currDay)
+                {
+                    if(slots[s].getStart() >= start)
+                    {
+                        emps[e].addAvailability(slots[s].getId());
+                    }
+                    s++;
+                }
+
+                cout << "Does the employee have any more availability on " << days[currDay] << "? "
+                << "1 for yes, 0 for no: ";
+                cin >> resp;
+            }
+            while(slots[s].getDay() == currDay)
+            {
+                s++;
             }
         }
         empId++;   
@@ -183,6 +196,7 @@ Scheduler input()
 int main()
 {
     Scheduler scheduler = input();
+    //scheduler.displayAvailability();
 
     scheduler.assignSchedule();
 
