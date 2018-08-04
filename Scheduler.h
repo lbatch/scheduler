@@ -16,9 +16,6 @@
 using namespace std;
 using namespace rehearse;
 
-#define MAX_SLOTS 10
-#define MAX_EMPLOYEES 10
-
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
@@ -32,9 +29,15 @@ public:
     {
         _schedule = sched;
     };
+    Scheduler(Schedule sched, vector <Employee> emps)
+    {
+        _schedule = sched;
+        _employeeAvail = emps;
+    }
     virtual ~Scheduler(){
     };
     Schedule getSchedule();
+    const int getNumEmployees();
     void addEmployee(Employee e);
     void removeEmployee(Employee e);
     void assignSchedule();

@@ -19,6 +19,11 @@ const vector <Slot> Schedule::getSlots()
     return _slots;
 }
 
+const int Schedule::getNumSlots()
+{
+    return _slots.size();
+}
+
 void Schedule::setName(string newName)
 {
     _scheduleName = newName;
@@ -26,14 +31,7 @@ void Schedule::setName(string newName)
 
 void Schedule::addSlot(Slot newSlot)
 {
-    if(_slots.size() < MAX_SLOTS)
-    {
-        _slots.push_back(newSlot);
-    }
-    else
-    {
-        cout << "Schedule is full" << endl;
-    }
+    _slots.push_back(newSlot);
 }
 
 void Schedule::addEmployeeToSlot(Employee e, int s)

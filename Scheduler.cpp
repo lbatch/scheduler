@@ -5,6 +5,11 @@ Schedule Scheduler::getSchedule()
     return _schedule;
 }
 
+const int Scheduler::getNumEmployees()
+{
+    return _employeeAvail.size();
+}
+
 void Scheduler::addEmployee(Employee e)
 {
    _employeeAvail.push_back(e);
@@ -27,8 +32,8 @@ void Scheduler::assignSchedule()
     CelModel model(solver);
 
     CelNumVarArray x;
-    int E = 10; // number of employees
-    int S = 10; // number of slots
+    int E = getNumEmployees(); 
+    int S = _schedule.getNumSlots();
     x.multiDimensionResize(2, E, S);
 
     CelExpression objective;
@@ -94,7 +99,7 @@ void Scheduler::assignSchedule()
             {
                 _schedule.addEmployeeToSlot(_employeeAvail[i],j);
             }
-            printf("Solution for x_%d_%d : %g\n", i, j, x_i_j_value);
+          //  printf("Solution for x_%d_%d : %g\n", i, j, x_i_j_value);
         }
     }
 

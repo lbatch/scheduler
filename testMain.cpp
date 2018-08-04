@@ -3,32 +3,26 @@
 #include "Schedule.h"
 #include "Scheduler.h"
 
-int main()
+vector<Slot> getSlots()
 {
-    Slot s0(0, 1, 2, 1, 2, 3);
-    Slot s1(1, 2, 3, 1, 2, 3);
-    Slot s2(2, 3, 4, 1, 2, 3);
-    Slot s3(3, 4, 5, 1, 2, 3);
-    Slot s4(4, 5, 6, 1, 2, 3);
-    Slot s5(5, 1, 2, 2, 2, 3);
-    Slot s6(6, 2, 3, 2, 2, 3);
-    Slot s7(7, 3, 4, 2, 2, 3);
-    Slot s8(7, 4, 5, 2, 2, 3);
-    Slot s9(7, 5, 6, 2, 2, 3);
+    vector<Slot> slots;
+    slots.push_back(Slot(0, 1, 2, 1, 2, 3));
+    slots.push_back(Slot(1, 2, 3, 1, 2, 3));
+    slots.push_back(Slot(2, 3, 4, 1, 2, 3));
+    slots.push_back(Slot(3, 4, 5, 1, 2, 3));
+    slots.push_back(Slot(4, 5, 6, 1, 2, 3));
+    slots.push_back(Slot(5, 1, 2, 2, 2, 3));
+    slots.push_back(Slot(6, 2, 3, 2, 2, 3));
+    slots.push_back(Slot(7, 3, 4, 2, 2, 3));
+    slots.push_back(Slot(8, 4, 5, 2, 2, 3));
+    slots.push_back(Slot(9, 5, 6, 2, 2, 3));
 
-    string days[7] = {"Sunday", "Monday", "Tuesday",
-        "Wednesday", "Thursday", "Friday", "Saturday"};
-    Schedule schedule(0, "Schedule", days);
-    schedule.addSlot(s0); 
-    schedule.addSlot(s1); 
-    schedule.addSlot(s2); 
-    schedule.addSlot(s3); 
-    schedule.addSlot(s4); 
-    schedule.addSlot(s5); 
-    schedule.addSlot(s6); 
-    schedule.addSlot(s7); 
-    schedule.addSlot(s8); 
-    schedule.addSlot(s9);
+    return slots;
+}
+
+vector<Employee> getEmployees()
+{
+    vector<Employee> emps;
 
     Employee e0(0, "Lydia", 2, 4);
     e0.addAvailability(0);
@@ -37,6 +31,7 @@ int main()
     e0.addAvailability(3);
     e0.addAvailability(4);
     e0.addAvailability(5);
+    emps.push_back(e0);
 
     Employee e1(1, "Lauren", 2, 4);
     e1.addAvailability(1);
@@ -45,6 +40,7 @@ int main()
     e1.addAvailability(4);
     e1.addAvailability(5);
     e1.addAvailability(6);
+    emps.push_back(e1);
 
     Employee e2(2, "Laurel", 2, 4);
     e2.addAvailability(2);
@@ -53,6 +49,7 @@ int main()
     e2.addAvailability(5);
     e2.addAvailability(6);
     e2.addAvailability(7);
+    emps.push_back(e2);
 
     Employee e3(3, "Brenda", 2, 4);
     e3.addAvailability(3);
@@ -61,6 +58,7 @@ int main()
     e3.addAvailability(6);
     e3.addAvailability(7);
     e3.addAvailability(8);
+    emps.push_back(e3);
 
     Employee e4(4, "Kassie", 2, 4);
     e4.addAvailability(4);
@@ -69,6 +67,7 @@ int main()
     e4.addAvailability(7);
     e4.addAvailability(8);
     e4.addAvailability(9);
+    emps.push_back(e4);
 
     Employee e5(5, "Bessie", 2, 4);
     e5.addAvailability(5);
@@ -77,6 +76,7 @@ int main()
     e5.addAvailability(8);
     e5.addAvailability(9);
     e5.addAvailability(0);
+    emps.push_back(e5);
 
     Employee e6(6, "Jaycie", 2, 4);
     e6.addAvailability(6);
@@ -85,6 +85,7 @@ int main()
     e6.addAvailability(9);
     e6.addAvailability(0);
     e6.addAvailability(1);
+    emps.push_back(e6);
 
     Employee e7(7, "Bayleigh", 2, 4);
     e7.addAvailability(7);
@@ -93,6 +94,7 @@ int main()
     e7.addAvailability(0);
     e7.addAvailability(1);
     e7.addAvailability(2);
+    emps.push_back(e7);
 
     Employee e8(8, "Hannah", 2, 4);
     e8.addAvailability(8);
@@ -101,6 +103,7 @@ int main()
     e8.addAvailability(1);
     e8.addAvailability(2);
     e8.addAvailability(3);
+    emps.push_back(e8);
 
     Employee e9(9, "Hannah", 2, 4);
     e9.addAvailability(9);
@@ -109,22 +112,31 @@ int main()
     e9.addAvailability(2);
     e9.addAvailability(3);
     e9.addAvailability(4);
+    emps.push_back(e9);
 
-    Scheduler scheduler(schedule);
-    scheduler.addEmployee(e0);
-    scheduler.addEmployee(e1);
-    scheduler.addEmployee(e2);
-    scheduler.addEmployee(e3);
-    scheduler.addEmployee(e4);
-    scheduler.addEmployee(e5);
-    scheduler.addEmployee(e6);
-    scheduler.addEmployee(e7);
-    scheduler.addEmployee(e8);
-    scheduler.addEmployee(e9);
+    return emps;
+}
+
+Scheduler setUp(string name, string* days, vector<Slot> slots, vector <Employee> emps) {
+    Schedule schedule(0, name, days, slots);
+    Scheduler scheduler(schedule, emps);
+
+    return scheduler;
+}
+
+int main()
+{
+    string days[7] = {"Sunday", "Monday", "Tuesday",
+        "Wednesday", "Thursday", "Friday", "Saturday"};
+    
+    vector <Slot> slots = getSlots();
+    vector <Employee> employees = getEmployees();
+
+    Scheduler scheduler = setUp("Schedule", days, slots, employees);
 
     scheduler.assignSchedule();
 
-    Schedule newSched = scheduler.getSchedule();
-    newSched.display();    
+    Schedule schedule = scheduler.getSchedule();
+    schedule.display();    
 
 }
