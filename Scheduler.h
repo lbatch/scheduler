@@ -41,6 +41,7 @@ public:
     void addEmployee(Employee e);
     void removeEmployee(Employee e);
     void assignSchedule();
+    void displayAvailability();
 };
 
 #endif

@@ -72,7 +72,6 @@ void Slot::setCapacity(int newCapacity)
 
 void Slot::addToSlot(Employee e)
 {
-    assert(_current < _capacity);
     _assignedToSlot.push_back(e);
     _current++;
 }
