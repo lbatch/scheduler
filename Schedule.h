@@ -16,18 +16,18 @@ class Schedule
 {
 private:
     int _id;
-    string * _days;
+    vector <string> _days;
     string _scheduleName;
     vector <Slot> _slots;
 public:
     Schedule() {
     }
-    Schedule(int id, string name, string* days){
+    Schedule(int id, string name, vector <string> days){
         _id = id;
         _scheduleName = name;
         _days = days;
     };
-    Schedule(int id, string name, string* days, vector<Slot> slots){
+    Schedule(int id, string name, vector<string> days, vector<Slot> slots){
         _id = id;
         _scheduleName = name;
         _days = days;
