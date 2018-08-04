@@ -33,99 +33,59 @@ vector<Slot> getSlots(vector <string> days)
     return slots;
 }
 
-vector<Employee> getEmployees()
+vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
 {
-    vector<Employee> emps;
+    vector <Employee> emps;
+    int numEmps;
+    int empId = 0;
+    string name;
+    int minHrs;
+    int maxHrs;
+    char resp;
 
-    Employee e0(0, "Lydia", 2, 4);
-    e0.addAvailability(0);
-    e0.addAvailability(1);
-    e0.addAvailability(2);
-    e0.addAvailability(3);
-    e0.addAvailability(4);
-    e0.addAvailability(5);
-    emps.push_back(e0);
+    cout << "How many employees do you want to add? ";
+    cin >> numEmps;
+    cout << endl;
 
-    Employee e1(1, "Lauren", 2, 4);
-    e1.addAvailability(1);
-    e1.addAvailability(2);
-    e1.addAvailability(3);
-    e1.addAvailability(4);
-    e1.addAvailability(5);
-    e1.addAvailability(6);
-    emps.push_back(e1);
+    for(int e = 0; e < numEmps; e++)
+    {
+        cout << "Next employee..." << endl;
+        cout << "What is the employee's name? ";
+        cin.ignore();
+        getline(cin, name);
+        cout << "Name is: " << name << endl;
+        cout << "What is the minimum number of hours you want to schedule " << name << " for? ";
+        cin >> minHrs;
+        cout << "What is the maximum number of hours you want to schedule " << name << " for? ";
+        cin >> maxHrs;
 
-    Employee e2(2, "Laurel", 2, 4);
-    e2.addAvailability(2);
-    e2.addAvailability(3);
-    e2.addAvailability(4);
-    e2.addAvailability(5);
-    e2.addAvailability(6);
-    e2.addAvailability(7);
-    emps.push_back(e2);
+        emps.push_back(Employee(empId, name, minHrs, maxHrs, slots.size()));
 
-    Employee e3(3, "Brenda", 2, 4);
-    e3.addAvailability(3);
-    e3.addAvailability(4);
-    e3.addAvailability(5);
-    e3.addAvailability(6);
-    e3.addAvailability(7);
-    e3.addAvailability(8);
-    emps.push_back(e3);
+        for(int s = 0; s < slots.size(); s++)
+        {
+            cout << "Is the employee available on "
+                << days[slots[s].getDay()] << " from "
+                << slots[s].getStart() << ":00 to "
+                << slots[s].getEnd() <<  ":00? " 
+                << "Type Y for yes, N for no: ";
 
-    Employee e4(4, "Kassie", 2, 4);
-    e4.addAvailability(4);
-    e4.addAvailability(5);
-    e4.addAvailability(6);
-    e4.addAvailability(7);
-    e4.addAvailability(8);
-    e4.addAvailability(9);
-    emps.push_back(e4);
+            cin.ignore();
+            cin >> resp;
 
-    Employee e5(5, "Bessie", 2, 4);
-    e5.addAvailability(5);
-    e5.addAvailability(6);
-    e5.addAvailability(7);
-    e5.addAvailability(8);
-    e5.addAvailability(9);
-    e5.addAvailability(0);
-    emps.push_back(e5);
-
-    Employee e6(6, "Jaycie", 2, 4);
-    e6.addAvailability(6);
-    e6.addAvailability(7);
-    e6.addAvailability(8);
-    e6.addAvailability(9);
-    e6.addAvailability(0);
-    e6.addAvailability(1);
-    emps.push_back(e6);
-
-    Employee e7(7, "Bayleigh", 2, 4);
-    e7.addAvailability(7);
-    e7.addAvailability(8);
-    e7.addAvailability(9);
-    e7.addAvailability(0);
-    e7.addAvailability(1);
-    e7.addAvailability(2);
-    emps.push_back(e7);
-
-    Employee e8(8, "Hannah", 2, 4);
-    e8.addAvailability(8);
-    e8.addAvailability(9);
-    e8.addAvailability(0);
-    e8.addAvailability(1);
-    e8.addAvailability(2);
-    e8.addAvailability(3);
-    emps.push_back(e8);
-
-    Employee e9(9, "Hannah", 2, 4);
-    e9.addAvailability(9);
-    e9.addAvailability(0);
-    e9.addAvailability(1);
-    e9.addAvailability(2);
-    e9.addAvailability(3);
-    e9.addAvailability(4);
-    emps.push_back(e9);
+            switch(resp)
+            {
+                case 'Y': case 'y':
+                    emps[e].addAvailability(slots[s].getId());
+                    break;
+                case 'N': case 'n':
+                    break;
+                default:
+                    break;
+            }
+        }
+        empId++;   
+        cout << endl;
+    }
 
     return emps;
 }
@@ -160,13 +120,25 @@ vector<string> assignDays(int start, int num)
 
 vector<string> getDays()
 {
+    bool invalid = true;
     int numDays;
-    cout << "How many days are there on your schedule? ";
-    cin >> numDays;
+    int startDay;
     vector<string> days;
 
-    int startDay;
-    bool invalid = true;
+    while(invalid)
+    {
+        cout << "How many days are there on your schedule (up to 7)? ";
+        cin >> numDays;
+        if(numDays < 1 || numDays > 7)
+        {
+            cout <<  "Invalid choice; please try again" << endl;
+        }
+        else invalid = false;
+    }
+
+    cout << endl;
+    invalid = true;
+
     while(invalid)
     {
         cout << "On what day does your schedule start?" << endl;
@@ -187,6 +159,7 @@ vector<string> getDays()
         {
             invalid = false;
             days = assignDays(startDay, numDays);
+            cout << endl;
             return days;
         }
     }
@@ -199,7 +172,7 @@ Scheduler input()
 
     vector<string> days = getDays();
     vector <Slot> slots = getSlots(days);
-    vector <Employee> employees = getEmployees();
+    vector <Employee> employees = getEmployees(slots, days);
 
     Scheduler scheduler = setUp("Schedule", days, slots, employees);
 
