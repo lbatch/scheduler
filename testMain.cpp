@@ -302,13 +302,6 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
         e++;
     }
 
-    if(availMode == 'C' || availMode == 'c')
-    {
-        vector <Employee> cemps = getConflicts(emps, slots);
-        cout << endl;
-        f.close();
-        return cemps;
-    }
 
     cout << endl;
     f.close();
