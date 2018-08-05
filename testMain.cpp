@@ -2,6 +2,41 @@
 #include "Employee.h"
 #include "Schedule.h"
 #include "Scheduler.h"
+#include "CSVRow.h"
+
+using std::istream;
+using std::stoi;
+
+/* SET UP FUNCTIONS */
+
+vector<string> assignDays(int start, int num)
+{
+    vector<string> days;
+    string week[7] = {"Sunday", "Monday", "Tuesday",
+        "Wednesday", "Thursday", "Friday", "Saturday"};
+
+    for(int i = 0; i < num; i++)
+    {
+        int dayOf = start + i -1;
+        if(dayOf > 6)
+        {
+            dayOf = dayOf % 7;
+        }
+
+        days.push_back(week[dayOf]);
+    }
+
+    return days;
+}
+
+Scheduler setUp(string name, vector<string> days, vector<Slot> slots, vector <Employee> emps) {
+    Schedule schedule(0, name, days, slots);
+    Scheduler scheduler(schedule, emps);
+
+    return scheduler;
+}
+
+/* TERMINAL INPUT */
 
 vector<Slot> getSlots(vector <string> days)
 {
@@ -103,34 +138,6 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
     return emps;
 }
 
-Scheduler setUp(string name, vector<string> days, vector<Slot> slots, vector <Employee> emps) {
-    Schedule schedule(0, name, days, slots);
-    Scheduler scheduler(schedule, emps);
-
-    return scheduler;
-}
-
-
-vector<string> assignDays(int start, int num)
-{
-    vector<string> days;
-    string week[7] = {"Sunday", "Monday", "Tuesday",
-        "Wednesday", "Thursday", "Friday", "Saturday"};
-
-    for(int i = 0; i < num; i++)
-    {
-        int dayOf = start + i -1;
-        if(dayOf > 6)
-        {
-            dayOf = dayOf % 7;
-        }
-
-        days.push_back(week[dayOf]);
-    }
-
-    return days;
-}
-
 vector<string> getDays()
 {
     bool invalid = true;
@@ -190,12 +197,133 @@ Scheduler input()
     Scheduler scheduler = setUp("Schedule", days, slots, employees);
 
     return scheduler;
-    
 }
+
+/* FILE INPUT */
+istream& operator>>(istream& str, CSVRow& data)
+{
+    data.readNextRow(str);
+    return str;
+}
+
+vector<Slot> getSlots(vector <string> days, string slotFile)
+{
+    ifstream f;
+    f.open(slotFile);
+    int id;
+    int day;
+    double start;
+    double end;
+    int min;
+    int max;
+
+    CSVRow row;
+    vector<Slot> slots;
+    while(f >> row)
+    {
+        id = stoi(row[0]);
+        day = stoi(row[1]);
+        start = stof(row[2]);
+        end = stof(row[3]);
+        min = stoi(row[4]);
+        max = stoi(row[5]);
+
+        slots.push_back(Slot(id, day, start, end, min, max));
+    }
+
+    f.close();
+    return slots;
+}
+
+vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, string empFile)
+{
+    ifstream f;
+    f.open(empFile);
+    vector <Employee> emps;
+    int empId;
+    string name;
+    int minHrs;
+    int maxHrs;
+    int e = 0;
+    int avail;
+    int rowInd;
+
+    CSVRow row;
+
+    while(f >> row)
+    {
+        empId = stoi(row[0]);
+        name = row[1];
+        minHrs = stoi(row[2]);
+        maxHrs = stoi(row[3]);
+        emps.push_back(Employee(empId, name, minHrs, maxHrs, slots.size()));
+
+        rowInd = 4;
+        while(row[rowInd].compare("") != 0)
+        {
+            avail = stoi(row[rowInd]);
+            emps[e].addAvailability(avail);
+            rowInd++;
+        }
+        cout << endl;
+        e++;
+    }
+
+    f.close();
+    return emps;
+}
+
+Scheduler fileInput()
+{
+    string slotFile;
+    string empFile;
+    ifstream f;
+    cout << "Welcome to Employee Scheduler!" << endl << endl;
+
+    vector<string> days = getDays();
+
+    cout << "Please provide the name of a slot file." << endl;
+    cout << "File must be in CSV format; each row must represent one slot." << endl;
+    cout << "Columns in each row must be, in order: " << endl << endl;
+    cout << "Slot ID: 0-indexed and sequential" << endl;
+    cout << "Day of the week, where first day of the scheduler is represented as a 0 and each day counts from there" << endl;
+    cout << "Start time: In decimal format; eg, 8am is represented as 8; 12:30pm is represented as 12.5; 5:30pm is represented as 17.5" << endl;
+    cout << "End time: In decimal format; eg, 8am is represented as 8; 12:30pm is represented as 12.5; 5:30pm is represented as 17.5" << endl;
+    cout << "Minimum number of employees required for the slot" << endl;
+    cout << "Maximum number of employees allowed for the spot" << endl << endl;
+
+    cout << "File name here: ";
+    cin.ignore();
+    getline(cin, slotFile);
+
+    vector <Slot> slots = getSlots(days, slotFile);
+
+    cout << "Please provide the name of an employee file." << endl;
+    cout << "File must be in CSV format; each row must represent one employee." << endl;
+    cout << "Columns in each row must be, in order: " << endl << endl;
+    cout << "Employee ID: 0-indexed and sequential" << endl;
+    cout << "Name of employee" << endl;
+    cout << "Minimum number of hours to schedule the employee" << endl;
+    cout << "Maxmimum number of hours to schedule the employee" << endl;
+    cout << "One column for each slot for which the employee is available, with that slot's id" << endl << endl;
+
+    cout << "File name here: ";
+    getline(cin, empFile);
+
+    cout << empFile << endl;
+    vector <Employee> employees = getEmployees(slots, days, empFile);
+
+    Scheduler scheduler = setUp("Schedule", days, slots, employees);
+
+    return scheduler;
+}
+
 
 int main()
 {
-    Scheduler scheduler = input();
+    Scheduler scheduler = fileInput();
+
+    //Scheduler scheduler = input();
     //scheduler.displayAvailability();
 
     scheduler.assignSchedule();
