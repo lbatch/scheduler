@@ -17,7 +17,7 @@ vector<string> assignDays(int start, int num)
 
     for(int i = 0; i < num; i++)
     {
-        int dayOf = start + i -1;
+        int dayOf = start + i;
         if(dayOf > 6)
         {
             dayOf = dayOf % 7;
@@ -103,7 +103,7 @@ vector<string> getDays()
         if(sd != -1)
         {
             invalid = false;
-            days = assignDays(startDay, numDays);
+            days = assignDays(sd, numDays);
             cout << endl;
             return days;
         }
