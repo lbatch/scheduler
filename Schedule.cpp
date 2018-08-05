@@ -24,6 +24,17 @@ const int Schedule::getNumSlots()
     return _slots.size();
 }
 
+const int Schedule::getTotalMinHours()
+{
+    int total = 0;
+    for(int s = 0; s < getNumSlots(); s++)
+    {
+        total += _slots[s].getMin();
+    }
+
+    return total;
+}
+
 void Schedule::setName(string newName)
 {
     _scheduleName = newName;

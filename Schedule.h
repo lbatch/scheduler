@@ -45,6 +45,7 @@ public:
         return _days;
     }
     const int getNumSlots();
+    const int getTotalMinHours();
     void setName(string newName);
     void addSlot(Slot newSlot);
     void display();
