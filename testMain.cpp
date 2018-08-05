@@ -160,13 +160,13 @@ vector<Slot> getSlots(vector <string> days)
         slots.push_back(Slot(id, day, start, end, min, max));
     }
 
+    cout << endl;
     f.close();
     return slots;
 }
 
 vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
 {
-    cout << endl;
     cout << "EMPLOYEE FILE UPLOAD: " << endl;
     cout << "Please provide the name of an employee file." << endl;
     cout << "File must be in CSV format; each row must represent one employee." << endl;
@@ -212,6 +212,7 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
         e++;
     }
 
+    cout << endl;
     f.close();
     return emps;
 }
@@ -245,7 +246,6 @@ int main()
     //scheduler.displayAvailability();
 
     scheduler.assignSchedule();
-
     Schedule schedule = scheduler.getSchedule();
     schedule.writeToFile();   
 

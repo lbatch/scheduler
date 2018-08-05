@@ -24,15 +24,24 @@ class Scheduler
 private:
     Schedule _schedule;
     vector <Employee>  _employeeAvail;
+    int _objective;
 public:
     Scheduler(Schedule sched)
     {
         _schedule = sched;
+        _objective = 0;
     };
     Scheduler(Schedule sched, vector <Employee> emps)
     {
         _schedule = sched;
         _employeeAvail = emps;
+        _objective  = 0;
+    }
+    Scheduler(Schedule sched, vector <Employee> emps, int obj)
+    {
+        _schedule = sched;
+        _employeeAvail = emps;
+        _objective  = obj;
     }
     virtual ~Scheduler(){
     };

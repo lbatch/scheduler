@@ -51,10 +51,13 @@ void Scheduler::assignSchedule()
 
     int E = getNumEmployees(); 
     int S = _schedule.getNumSlots();
+    int totalHours = _schedule.getTotalMinHours();
+    int avg = totalHours / S;
     CelNumVarArray x;
     x.multiDimensionResize(2, E, S);
 
     CelExpression objective;
+
     for(int i = 0; i < E; i++)
     {
         for(int j = 0; j<S; j++)
@@ -62,6 +65,8 @@ void Scheduler::assignSchedule()
             objective += 0 - x[i][j];
         }
     }
+    
+
     model.setObjective(objective);
 
     vector <Slot> slots = _schedule.getSlots();
