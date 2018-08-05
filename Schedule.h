@@ -3,11 +3,13 @@
 #include "Employee.h"
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 using std::string;
 using std::vector;
 using std::cout;
 using std::endl;
+using std::ofstream;
 
 #ifndef SCHEDULE_H
 #define SCHEDULE_H
@@ -47,6 +49,7 @@ public:
     void addSlot(Slot newSlot);
     void display();
     void addEmployeeToSlot(Employee emp, int slotId);
+    void writeToFile();
 };
 
 #endif

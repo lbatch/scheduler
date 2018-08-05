@@ -50,3 +50,26 @@ void Schedule::display()
 
     }
 }
+
+void Schedule::writeToFile()
+{
+    cout << "Writing schedule to file..." << endl;
+
+    string fileName = _scheduleName + ".txt";
+    ofstream f(fileName);
+    if(f)
+    {
+        for (auto slot: _slots)
+        {
+            f << _days[slot.getDay()] << ": " << endl;
+            f << slot.getStart() << " - " << slot.getEnd() << endl;
+            vector <Employee> emps = slot.getEmployees();
+            for(auto emp : emps)
+            {
+                f << emp.getId() << ": " << emp.getName() << endl;
+            }
+            f << endl;
+        }
+    }
+
+}
