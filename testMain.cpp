@@ -30,6 +30,7 @@ vector<string> assignDays(int start, int num)
 }
 
 Scheduler setUp(string name, vector<string> days, vector<Slot> slots, vector <Employee> emps) {
+
     Schedule schedule(0, name, days, slots);
     Scheduler scheduler(schedule, emps);
 
@@ -165,7 +166,7 @@ vector<Slot> getSlots(vector <string> days)
     return slots;
 }
 
-vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
+vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char availMode)
 {
     cout << "EMPLOYEE FILE UPLOAD: " << endl;
     cout << "Please provide the name of an employee file." << endl;
@@ -175,7 +176,10 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
     cout << "Name" << endl;
     cout << "Minimum number of hours to schedule the employee" << endl;
     cout << "Maxmimum number of hours to schedule the employee" << endl;
-    cout << "One column for each slot ID for which the employee is available" << endl << endl;
+    if(availMode == 'U')
+        cout << "One column for each slot ID for which the employee is unavailable" << endl << endl;
+    else
+        cout << "One column for each slot ID for which the employee is available" << endl << endl;
 
     cout << "File name here: ";
     string empFile;
@@ -203,12 +207,39 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
         emps.push_back(Employee(empId, name, minHrs, maxHrs, slots.size()));
 
         rowInd = 4;
-        while(row[rowInd].compare("") != 0)
+
+        if(availMode == 'U')
         {
-            avail = stoi(row[rowInd]);
-            emps[e].addAvailability(avail);
-            rowInd++;
+            int conflict = -1;
+
+            if(row[rowInd].compare("") != 0)
+                conflict = stoi(row[rowInd]);
+
+            for(int i = 0; i < slots.size(); i++)
+            {
+                if(conflict == -1 || i != conflict)
+                {
+                    emps[e].addAvailability(i);
+                }
+                else
+                {
+                    rowInd++;
+                    if(row[rowInd].compare("") != 0)
+                        conflict = stoi(row[rowInd]);
+
+                }
+            }
         }
+        else
+        {
+            while(row[rowInd].compare("") != 0)
+            {
+                avail = stoi(row[rowInd]);
+                emps[e].addAvailability(avail);
+                rowInd++;
+            }
+        }
+
         e++;
     }
 
@@ -219,9 +250,6 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days)
 
 Scheduler input()
 {
-    string slotFile;
-    string empFile;
-    ifstream f;
     cout << "***********************************" << endl;
     cout << "**     EMPLOYEE SCHEDULER        **" << endl;
     cout << "***********************************" << endl;
@@ -230,9 +258,20 @@ Scheduler input()
 
     vector<string> days = getDays();
     vector <Slot> slots = getSlots(days);
-    vector <Employee> employees = getEmployees(slots, days);
 
-    Scheduler scheduler = setUp("Schedule", days, slots, employees);
+    char availMode;
+    cout << "Will your employee file provide slots for which the employee is (A)VAILABLE or slots for which the employee is (U)NAVAILABLE?" << endl;
+    cout << "A for an availability file; U for an unavailability/conflict file: ";
+    cin >> availMode;
+    cin.ignore();
+
+    vector <Employee> employees = getEmployees(slots, days, availMode);
+
+    cout << "Please provide a title for your schedule: ";
+    string schedName;
+    cin >> schedName;
+
+    Scheduler scheduler = setUp(schedName, days, slots, employees);
 
     return scheduler;
 }

@@ -1,0 +1,324 @@
+Saturday: 
+8 - 9
+0: Alex
+2: George
+8: Bill
+
+Saturday: 
+9 - 10
+0: Alex
+2: George
+8: Bill
+
+Saturday: 
+10 - 11
+0: Alex
+2: George
+3: Gracie
+
+Saturday: 
+11 - 12
+0: Alex
+1: Lydia
+3: Gracie
+
+Saturday: 
+12 - 13
+4: Courtnay
+5: Amy
+8: Bill
+
+Saturday: 
+13 - 14
+4: Courtnay
+5: Amy
+8: Bill
+
+Saturday: 
+14 - 15
+4: Courtnay
+5: Amy
+8: Bill
+
+Saturday: 
+15 - 16
+4: Courtnay
+5: Amy
+6: Dan
+
+Saturday: 
+16 - 17
+4: Courtnay
+8: Bill
+9: Mark
+
+Sunday: 
+8 - 9
+0: Alex
+1: Lydia
+9: Mark
+
+Sunday: 
+9 - 10
+0: Alex
+1: Lydia
+2: George
+
+Sunday: 
+10 - 11
+0: Alex
+1: Lydia
+2: George
+
+Sunday: 
+11 - 12
+0: Alex
+1: Lydia
+2: George
+
+Sunday: 
+12 - 13
+4: Courtnay
+5: Amy
+6: Dan
+
+Sunday: 
+13 - 14
+4: Courtnay
+5: Amy
+6: Dan
+
+Sunday: 
+14 - 15
+4: Courtnay
+5: Amy
+6: Dan
+
+Sunday: 
+15 - 16
+4: Courtnay
+5: Amy
+6: Dan
+
+Sunday: 
+16 - 17
+4: Courtnay
+5: Amy
+9: Mark
+
+Monday: 
+8 - 9
+0: Alex
+1: Lydia
+2: George
+
+Monday: 
+9 - 10
+0: Alex
+1: Lydia
+2: George
+
+Monday: 
+10 - 11
+0: Alex
+1: Lydia
+2: George
+
+Monday: 
+11 - 12
+0: Alex
+1: Lydia
+2: George
+
+Monday: 
+12 - 13
+4: Courtnay
+5: Amy
+6: Dan
+
+Monday: 
+13 - 14
+4: Courtnay
+5: Amy
+6: Dan
+
+Monday: 
+14 - 15
+4: Courtnay
+5: Amy
+8: Bill
+
+Monday: 
+15 - 16
+4: Courtnay
+5: Amy
+8: Bill
+
+Monday: 
+16 - 17
+4: Courtnay
+5: Amy
+8: Bill
+
+Tuesday: 
+8 - 9
+0: Alex
+1: Lydia
+9: Mark
+
+Tuesday: 
+9 - 10
+0: Alex
+1: Lydia
+2: George
+
+Tuesday: 
+10 - 11
+0: Alex
+1: Lydia
+2: George
+
+Tuesday: 
+11 - 12
+0: Alex
+1: Lydia
+2: George
+
+Tuesday: 
+12 - 13
+4: Courtnay
+5: Amy
+6: Dan
+
+Tuesday: 
+13 - 14
+5: Amy
+6: Dan
+9: Mark
+
+Tuesday: 
+14 - 15
+5: Amy
+6: Dan
+9: Mark
+
+Tuesday: 
+15 - 16
+6: Dan
+7: Danica
+9: Mark
+
+Tuesday: 
+16 - 17
+6: Dan
+7: Danica
+9: Mark
+
+Wednesday: 
+8 - 9
+0: Alex
+1: Lydia
+2: George
+
+Wednesday: 
+9 - 10
+0: Alex
+1: Lydia
+2: George
+
+Wednesday: 
+10 - 11
+0: Alex
+1: Lydia
+2: George
+
+Wednesday: 
+11 - 12
+0: Alex
+1: Lydia
+2: George
+
+Wednesday: 
+12 - 13
+4: Courtnay
+6: Dan
+7: Danica
+
+Wednesday: 
+13 - 14
+5: Amy
+6: Dan
+7: Danica
+
+Wednesday: 
+14 - 15
+4: Courtnay
+5: Amy
+7: Danica
+
+Wednesday: 
+15 - 16
+4: Courtnay
+5: Amy
+7: Danica
+
+Wednesday: 
+16 - 17
+4: Courtnay
+6: Dan
+7: Danica
+
+Thursday: 
+8 - 9
+1: Lydia
+2: George
+3: Gracie
+
+Thursday: 
+9 - 10
+3: Gracie
+8: Bill
+9: Mark
+
+Thursday: 
+10 - 11
+2: George
+3: Gracie
+8: Bill
+
+Thursday: 
+11 - 12
+3: Gracie
+8: Bill
+9: Mark
+
+Thursday: 
+12 - 13
+7: Danica
+8: Bill
+9: Mark
+
+Thursday: 
+13 - 14
+7: Danica
+8: Bill
+9: Mark
+
+Thursday: 
+14 - 15
+6: Dan
+8: Bill
+9: Mark
+
+Thursday: 
+15 - 16
+7: Danica
+8: Bill
+9: Mark
+
+Thursday: 
+16 - 17
+6: Dan
+8: Bill
+9: Mark
+
