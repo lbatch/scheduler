@@ -166,6 +166,50 @@ vector<Slot> getSlots(vector <string> days)
     return slots;
 }
 
+vector<Employee> getConflicts(vector<Employee> emps, vector<Slot> slots)
+{
+    cout << "CONFLICT FILE UPLOAD: " << endl;
+    cout << "Please provide the name of a conflict file." << endl;
+    cout << "File must be in CSV format; each row must represent one confict." << endl;
+    cout << "Columns in each row must be, in order: " << endl << endl;
+    cout << "Employee ID" << endl;
+    cout << "Day of conflict (0-indexed from first day of schedule)" << endl;
+    cout << "Start time of conflict" << endl;
+    cout << "End time of conflict" << endl;
+
+    cout << "File name here: ";
+    string conflictFile;
+    getline(cin, conflictFile);
+
+    ifstream f;
+    f.open(conflictFile);
+    int empId;
+    int day;
+    int startTime;
+    int endTime;
+    int rowInd;
+
+    CSVRow row;
+
+    while(f >> row)
+    {
+        empId = stoi(row[0]);
+        day = stoi(row[1]);
+        startTime = stoi(row[2]);
+        endTime = stoi(row[3]);
+
+        for(int s = 0; s < slots.size(); s++)
+        {
+            if(slots[s].getDay() == day && slots[s].getStart() < endTime && slots[s].getEnd() > startTime)
+            {
+                emps[empId].removeAvailability(s);
+            }
+        }
+    }
+
+    return emps;
+}
+
 vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char availMode)
 {
     cout << "EMPLOYEE FILE UPLOAD: " << endl;
@@ -176,7 +220,10 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
     cout << "Name" << endl;
     cout << "Minimum number of hours to schedule the employee" << endl;
     cout << "Maxmimum number of hours to schedule the employee" << endl;
-    if(availMode == 'U')
+
+    if(availMode == 'C' || availMode == 'c')
+        cout << endl << "You will then upload a SEPARATE file containing employee conflicts." << endl << endl;
+    if(availMode == 'U' || availMode == 'u')
         cout << "One column for each slot ID for which the employee is unavailable" << endl << endl;
     else
         cout << "One column for each slot ID for which the employee is available" << endl << endl;
@@ -187,7 +234,9 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
 
     ifstream f;
     f.open(empFile);
+
     vector <Employee> emps;
+
     int empId;
     string name;
     int minHrs;
@@ -208,16 +257,16 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
 
         rowInd = 4;
 
-        if(availMode == 'U')
+        if(availMode == 'U' || availMode == 'u')
         {
-            int conflict = -1;
+            int unavail = -1;
 
             if(row[rowInd].compare("") != 0)
-                conflict = stoi(row[rowInd]);
+                unavail = stoi(row[rowInd]);
 
             for(int i = 0; i < slots.size(); i++)
             {
-                if(conflict == -1 || i != conflict)
+                if(unavail == -1 || i != unavail)
                 {
                     emps[e].addAvailability(i);
                 }
@@ -225,22 +274,40 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
                 {
                     rowInd++;
                     if(row[rowInd].compare("") != 0)
-                        conflict = stoi(row[rowInd]);
+                        unavail = stoi(row[rowInd]);
 
                 }
             }
         }
-        else
+        else if(availMode == 'C' || availMode == 'c')
         {
-            while(row[rowInd].compare("") != 0)
+            for(int i = 0; i < slots.size(); i++)
             {
-                avail = stoi(row[rowInd]);
-                emps[e].addAvailability(avail);
-                rowInd++;
+                emps[e].addAvailability(i);
             }
         }
+        else
+        {
+            while(rowInd < row.size())
+            {
+                if(row[rowInd].compare("") != 0)
+                {
+                    avail = stoi(row[rowInd]);
+                    emps[e].addAvailability(avail);
+                }
+                rowInd++;
 
+            }
+        }
         e++;
+    }
+
+    if(availMode == 'C' || availMode == 'c')
+    {
+        vector <Employee> cemps = getConflicts(emps, slots);
+        cout << endl;
+        f.close();
+        return cemps;
     }
 
     cout << endl;
@@ -260,15 +327,16 @@ Scheduler input()
     vector <Slot> slots = getSlots(days);
 
     char availMode;
-    cout << "Will your employee file provide slots for which the employee is (A)VAILABLE or slots for which the employee is (U)NAVAILABLE?" << endl;
-    cout << "A for an availability file; U for an unavailability/conflict file: ";
+    cout << "Will your employee file provide slots for which the employee is (A)VAILABLE, slots for which the employee is (U)NAVAILABLE, or a list of (C)onflicts??" << endl;
+    cout << "A for an availability file; U for an unavailability/conflict file; C for a list of conflicts: ";
     cin >> availMode;
+    cout << availMode;
     cin.ignore();
 
     vector <Employee> employees = getEmployees(slots, days, availMode);
 
-    cout << "Please provide a title for your schedule: ";
     string schedName;
+    cout << "Please provide a name for your schedule: ";
     cin >> schedName;
 
     Scheduler scheduler = setUp(schedName, days, slots, employees);
@@ -281,11 +349,16 @@ int main()
 {
     Scheduler scheduler = input();
 
-    //Scheduler scheduler = input();
     //scheduler.displayAvailability();
 
-    scheduler.assignSchedule();
+    try{
+        scheduler.assignSchedule();
+    }   
+    catch(char const* msg){
+        cout << msg << endl;
+        return 1;
+    } 
     Schedule schedule = scheduler.getSchedule();
     schedule.writeToFile();   
-
+    return 0;
 }

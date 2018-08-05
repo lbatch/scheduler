@@ -1,0 +1,216 @@
+Tuesday: 
+8 - 9
+0: Alex
+
+Tuesday: 
+9 - 10
+0: Alex
+
+Tuesday: 
+10 - 11
+0: Alex
+
+Tuesday: 
+11 - 12
+0: Alex
+
+Tuesday: 
+12 - 13
+0: Alex
+
+Tuesday: 
+13 - 14
+0: Alex
+
+Tuesday: 
+14 - 15
+0: Alex
+
+Tuesday: 
+15 - 16
+0: Alex
+
+Tuesday: 
+16 - 17
+0: Alex
+
+Wednesday: 
+8 - 9
+0: Alex
+
+Wednesday: 
+9 - 10
+0: Alex
+
+Wednesday: 
+10 - 11
+0: Alex
+
+Wednesday: 
+11 - 12
+0: Alex
+
+Wednesday: 
+12 - 13
+0: Alex
+
+Wednesday: 
+13 - 14
+0: Alex
+
+Wednesday: 
+14 - 15
+0: Alex
+
+Wednesday: 
+15 - 16
+0: Alex
+
+Wednesday: 
+16 - 17
+0: Alex
+
+Thursday: 
+8 - 9
+0: Alex
+
+Thursday: 
+9 - 10
+0: Alex
+
+Thursday: 
+10 - 11
+0: Alex
+
+Thursday: 
+11 - 12
+0: Alex
+
+Thursday: 
+12 - 13
+0: Alex
+
+Thursday: 
+13 - 14
+0: Alex
+
+Thursday: 
+14 - 15
+0: Alex
+
+Thursday: 
+15 - 16
+0: Alex
+
+Thursday: 
+16 - 17
+0: Alex
+
+Friday: 
+8 - 9
+0: Alex
+
+Friday: 
+9 - 10
+0: Alex
+
+Friday: 
+10 - 11
+0: Alex
+
+Friday: 
+11 - 12
+0: Alex
+
+Friday: 
+12 - 13
+0: Alex
+
+Friday: 
+13 - 14
+0: Alex
+
+Friday: 
+14 - 15
+0: Alex
+
+Friday: 
+15 - 16
+0: Alex
+
+Friday: 
+16 - 17
+0: Alex
+
+Saturday: 
+8 - 9
+0: Alex
+
+Saturday: 
+9 - 10
+0: Alex
+
+Saturday: 
+10 - 11
+0: Alex
+
+Saturday: 
+11 - 12
+0: Alex
+
+Saturday: 
+12 - 13
+0: Alex
+
+Saturday: 
+13 - 14
+0: Alex
+
+Saturday: 
+14 - 15
+0: Alex
+
+Saturday: 
+15 - 16
+0: Alex
+
+Saturday: 
+16 - 17
+0: Alex
+
+Sunday: 
+8 - 9
+0: Alex
+
+Sunday: 
+9 - 10
+0: Alex
+
+Sunday: 
+10 - 11
+0: Alex
+
+Sunday: 
+11 - 12
+0: Alex
+
+Sunday: 
+12 - 13
+0: Alex
+
+Sunday: 
+13 - 14
+0: Alex
+
+Sunday: 
+14 - 15
+0: Alex
+
+Sunday: 
+15 - 16
+0: Alex
+
+Sunday: 
+16 - 17
+0: Alex
+

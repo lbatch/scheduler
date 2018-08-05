@@ -135,4 +135,12 @@ void Scheduler::assignSchedule()
         }
     }
 
+    if(!solver.isProvenOptimal())
+    {
+        throw "Solution could not be reached within constraints; you might not have enough employees with the correct availability to fill your minimum slots. Please re-run program with new information.";
+    }
+
+    return;
+
+
 }
