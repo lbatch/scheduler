@@ -1,3 +1,10 @@
+/***************************************************************************************************
+ * CSVRow
+ * Class for reading a row from a .csv file
+ * Sourced from https://stackoverflow.com/questions/1120140/how-can-i-read-and-parse-csv-files-in-c
+ * *************************************************************************************************/
+
+
 #include <iterator>
 #include <iostream>
 #include <fstream>
@@ -11,6 +18,7 @@ using std::size_t;
 using std::getline;
 using std::stringstream;
 using std::istream;
+
 
 class CSVRow
 {

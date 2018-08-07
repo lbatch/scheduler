@@ -11,6 +11,9 @@
         "bitset": "cpp",
         "initializer_list": "cpp",
         "utility": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp"
     }
 }

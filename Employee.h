@@ -1,3 +1,8 @@
+/*********************************************************************
+ * Employee.h
+ * Stores employee data and availability for scheduling
+ * *******************************************************************/
+
 #include <string>
 #include <iostream>
 #include <vector>
@@ -15,9 +20,9 @@ class Employee
 private:
     int _id;
     string _name;
-    vector<int> _availability;
-    int _minHours;
-    int _maxHours;
+    int _minHours; // Minimum number of hours for which employee must be scheduled
+    int _maxHours; // Maximum number of hours for which employee can be scheduled
+    vector<int> _availability; // Vector of slot IDs for which employee is available
 public:
     Employee(){
     }
@@ -35,13 +40,13 @@ public:
     const string getName();
     const int getMin();
     const int getMax();
-    bool checkAvailable(int slot);
     void setId(int newId);
     void setName(string newName);
     void setMin(int min);
     void setMax(int max);
-    void addAvailability(int slot);
-    void removeAvailability(int slot);
+    void addAvailability(int slot); // Adds availability for a given time slot
+    void removeAvailability(int slot); // Removes availability for a given time slot
+    bool checkAvailable(int slot); // Checks whether the employee is available during a given time slot
 };
 
 #endif

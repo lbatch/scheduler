@@ -1,14 +1,13 @@
 CC = g++
 CFLAGS = -g -std=c++11
-TARGET = scheduler
 
 INCLUDES = -I./coin-Rehearse/include/coin
 LFLAGS = -L./coin-Rehearse/lib
 
 LIBS = -lrehearse -lCbc -lCbcSolver -lCgl -lClp -lClpSolver -lCoinUtils -lOsi -lOsiCbc -lOsiClp -lOsiCommonTests
 
-SRCS = Employee.cpp Schedule.cpp Scheduler.cpp Slot.cpp testMain.cpp
-MAIN = testMain
+SRCS = Employee.cpp Schedule.cpp Scheduler.cpp Slot.cpp main.cpp
+MAIN = employeeScheduler
 
 .PHONY: clean
 
