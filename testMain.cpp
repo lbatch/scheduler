@@ -222,15 +222,47 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
     cout << "Maxmimum number of hours to schedule the employee" << endl;
 
     if(availMode == 'C' || availMode == 'c')
+    {
         cout << endl << "You will then upload a SEPARATE file containing employee conflicts." << endl << endl;
-    if(availMode == 'U' || availMode == 'u')
+    }
+    else if(availMode == 'U' || availMode == 'u')
+    {
         cout << "One column for each slot ID for which the employee is unavailable" << endl << endl;
+    }
     else
+    {
         cout << "One column for each slot ID for which the employee is available" << endl << endl;
+    }
 
     cout << "File name here: ";
     string empFile;
     getline(cin, empFile);
+
+    cout << "Do you want to restrict employees to within 1 hour of the average # of hours?" << endl;
+    cout << "If you choose this option, minimum and maximum hours per employee will be set to 1 hour above and below the average." << endl;
+    cout << "Bear in mind that this may impact the scheduler's ability to find an optimal solution." << endl << endl;
+
+    char avg_res;
+    bool avg;
+    int avg_total;
+    int avg_min;
+    int avg_max;
+    cout << "Y for yes, N for no: ";
+    cin >> avg_res;
+    cin.ignore();
+    if(avg_res == 'Y' || avg_res == 'y')
+    {
+        avg_total = 0;
+        for (int i = 0; i < slots.size(); i++)
+        {
+            avg_total += slots[i].getMin();
+        }
+        avg = true;
+    }
+    else
+    {
+        avg = false;
+    }
 
     ifstream f;
     f.open(empFile);
@@ -253,6 +285,7 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
         name = row[1];
         minHrs = stoi(row[2]);
         maxHrs = stoi(row[3]);
+
         emps.push_back(Employee(empId, name, minHrs, maxHrs, slots.size()));
 
         rowInd = 4;
@@ -302,6 +335,20 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
         e++;
     }
 
+    if(availMode == 'C' || availMode == 'c')
+    {
+        emps = getConflicts(emps, slots);
+    }
+
+    if(avg)
+    {
+        for(int e = 0; e < emps.size(); e++)
+        {
+            emps[e].setMin(avg_total/emps.size() - 1);
+            emps[e].setMax(avg_total/emps.size() + 1);
+        }
+    }
+
 
     cout << endl;
     f.close();
@@ -323,8 +370,8 @@ Scheduler input()
     cout << "Will your employee file provide slots for which the employee is (A)VAILABLE, slots for which the employee is (U)NAVAILABLE, or a list of (C)onflicts??" << endl;
     cout << "A for an availability file; U for an unavailability/conflict file; C for a list of conflicts: ";
     cin >> availMode;
-    cout << availMode;
     cin.ignore();
+    cout << availMode;
 
     vector <Employee> employees = getEmployees(slots, days, availMode);
 
