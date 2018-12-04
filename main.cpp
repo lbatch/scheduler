@@ -10,10 +10,10 @@ using std::stoi;
 /* SET UP FUNCTION */
 
 // Configures scheduler for use; constructs schedule and scheduler and returns scheduler
-Scheduler setUp(string name, vector<string> days, vector<Slot> slots, vector <Employee> emps) {
+Scheduler setUp(string name, vector<string> days, vector<Slot> slots) {
 
     Schedule schedule(0, name, days, slots);
-    Scheduler scheduler(schedule, emps);
+    Scheduler scheduler(schedule);
 
     return scheduler;
 }
@@ -384,11 +384,9 @@ vector<Employee> getEmployees(vector <Slot> slots, vector<string> days, char ava
     return emps;
 }
 
-// Secure input from user
-Scheduler input()
+// Secure input from user to build scheduler
+Scheduler buildScheduler()
 {
-    char availMode;
-    vector <Employee> employees;
     string schedName;
 
     cout << "***********************************" << endl;
@@ -413,21 +411,6 @@ Scheduler input()
 
     cout << endl << "-------------------------------------------------------------" << endl << endl;;
 
-    cout << "Will your employee file(s) provide..." << endl;
-    cout << "...slots for which the employee is (A)VAILABLE" << endl;
-    cout << "...slots for which the employee is (U)NAVAILABLE" << endl;
-    cout << "...a list of (C)onflicts?" << endl << endl;
-    cout << "A for an availability file; U for an unavailability/conflict file; C for a list of conflicts: ";
-    cin >> availMode;
-    cin.ignore();
-    cout << endl;
-
-    cout << endl << "-------------------------------------------------------------" << endl << endl;;
-
-    employees = getEmployees(slots, days, availMode);
-
-    cout << endl << "-------------------------------------------------------------" << endl << endl;;
-
     cout << "Please provide a name for your schedule: ";
     cin >> schedName;
     cin.ignore();
@@ -435,21 +418,35 @@ Scheduler input()
 
     cout << endl << "-------------------------------------------------------------" << endl << endl;;
 
-    Scheduler scheduler = setUp(schedName, days, slots, employees);
+    Scheduler scheduler = setUp(schedName, days, slots);
     return scheduler;
 }
 
 
 int main()
 {
-    Scheduler scheduler = input();
+    char availMode;
+    vector<Employee> employees;
 
-    // Used for testing:
-    // scheduler.displayAvailability();
+    Scheduler scheduler = buildScheduler();
+
+    cout << "Will your employee file(s) provide..." << endl;
+    cout << "...slots for which the employee is (A)VAILABLE" << endl;
+    cout << "...slots for which the employee is (U)NAVAILABLE" << endl;
+    cout << "...a list of (C)onflicts?" << endl << endl;
+    cout << "A for an availability file; U for an unavailability/conflict file; C for a list of conflicts: ";
+
+    cin >> availMode;
+    cin.ignore();
+    cout << endl;
+
+    cout << endl << "-------------------------------------------------------------" << endl << endl;;
+
+    employees = getEmployees(scheduler.getSchedule().getSlots(), scheduler.getSchedule().getDays(), availMode);
 
     // Catch error when schedule cannot find optimal solution
     try{
-        scheduler.assignSchedule();
+        scheduler.assignSchedule(employees);
     }   
     catch(char const* msg){
         cout << msg << endl;

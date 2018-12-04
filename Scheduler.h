@@ -29,7 +29,6 @@ class Scheduler
 {
 private:
     Schedule _schedule;
-    vector <Employee>  _employeeAvail; // Employee availability for each slot in schedule
     int _objective; // Will be used to set alternate objectives; not currently in use
 public:
     // Constructor without pre-specified employee availability
@@ -38,28 +37,16 @@ public:
         _schedule = sched;
         _objective = 0;
     };
-    // Constructor with pre-specified employee availability
-    Scheduler(Schedule sched, vector <Employee> emps)
-    {
-        _schedule = sched;
-        _employeeAvail = emps;
-        _objective  = 0;
-    }
     // Constructor to be used with alternate objectives
-    Scheduler(Schedule sched, vector <Employee> emps, int obj)
+    Scheduler(Schedule sched, int obj)
     {
         _schedule = sched;
-        _employeeAvail = emps;
         _objective  = obj;
     }
     virtual ~Scheduler(){
     };
     Schedule getSchedule();
-    const int getNumEmployees();
-    void addEmployee(Employee e);
-    void removeEmployee(Employee e);
-    void assignSchedule(); // Assigns schedule using Rehearse library
-    void displayAvailability(); // Displays employee availability; used for testing
+    void assignSchedule(vector<Employee> emps); // Assigns schedule using Rehearse library
 };
 
 #endif

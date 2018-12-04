@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -g -std=c++11
 
-INCLUDES = -I./coin-Rehearse/include/coin
-LFLAGS = -L./coin-Rehearse/lib
+INCLUDES = -I./coin-Rehearse/include/coin/
+LFLAGS = -L./coin-Rehearse/lib/
 
 LIBS = -lrehearse -lCbc -lCbcSolver -lCgl -lClp -lClpSolver -lCoinUtils -lOsi -lOsiCbc -lOsiClp -lOsiCommonTests
 

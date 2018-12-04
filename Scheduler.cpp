@@ -11,35 +11,14 @@ Schedule Scheduler::getSchedule()
     return _schedule;
 }
 
-const int Scheduler::getNumEmployees()
-{
-    return _employeeAvail.size();
-}
-
-void Scheduler::addEmployee(Employee e)
-{
-   _employeeAvail.push_back(e);
-}
-
-void Scheduler::removeEmployee(Employee e)
-{
-    for(int i = 0; i < _employeeAvail.size(); i++)
-    {
-        if(_employeeAvail[i].getId() == e.getId())
-        {
-            _employeeAvail.erase(_employeeAvail.begin()+i);
-        }
-    }
-}
-
 // Assign schedule using linear programming library
-void Scheduler::assignSchedule()
+void Scheduler::assignSchedule(vector<Employee> emps)
 {
     OsiClpSolverInterface solver;
     CelModel model(solver);
 
     // Set dimensions of variable array to number of employees * number of slots
-    int E = getNumEmployees(); 
+    int E = emps.size(); 
     int S = _schedule.getNumSlots();
     CelNumVarArray x;
     x.multiDimensionResize(2, E, S);
@@ -51,7 +30,7 @@ void Scheduler::assignSchedule()
     {
         for(int j = 0; j<S; j++)
         {
-            objective += 0 - x[i][j];
+            objective += x[i][j];
         }
     }
 
@@ -82,7 +61,7 @@ void Scheduler::assignSchedule()
     {
         for(int j = 0; j < S; j++)
         {
-            model.addConstraint(x[i][j] <= _employeeAvail[i].checkAvailable(j));
+            model.addConstraint(x[i][j] <= emps[i].checkAvailable(j));
         }
     }
 
@@ -95,12 +74,12 @@ void Scheduler::assignSchedule()
         {
             numHours += x[i][j];
         }
-        model.addConstraint(0 - numHours <= 0 - _employeeAvail[i].getMin());
-        model.addConstraint(numHours <= _employeeAvail[i].getMax());
+        model.addConstraint(0 - numHours <= 0 - emps[i].getMin());
+        model.addConstraint(numHours <= emps[i].getMax());
     }
 
-    // Constraint 5: Slot cannot contain less than its maximum number of employees
-    // or more than its minimum number of employees
+    // Constraint 5: Slot cannot contain less than its minimum number of employees
+    // or more than its maximum number of employees
     for(int j = 0; j<S; j++)
     {
         CelExpression numEmp;
@@ -126,7 +105,7 @@ void Scheduler::assignSchedule()
             double x_i_j_value = model.getSolutionValue(x[i][j]);
             if(x_i_j_value)
             {
-                _schedule.addEmployeeToSlot(_employeeAvail[i],j);
+                _schedule.addEmployeeToSlot(emps[i],j);
             }
           // For testng:
           // printf("Solution for x_%d_%d : %g\n", i, j, x_i_j_value);
@@ -141,22 +120,4 @@ void Scheduler::assignSchedule()
 
     return;
 
-}
-
-// Display employee availability; used for testing
-void Scheduler::displayAvailability()
-{
-    vector <Slot> slots = _schedule.getSlots();
-    vector <string> days = _schedule.getDays();
-    for(int i = 0; i < _employeeAvail.size(); i++)
-    {
-        cout << _employeeAvail[i].getName() << ": " << endl;
-        for(int s = 0; s < slots.size(); s++)
-        {
-            cout << "Slot ID: " << slots[s].getId() << endl;  
-            cout << "Slot Day: " << days[slots[s].getDay()] << endl;
-            cout << "Slot Time: " << slots[s].getStart();
-            cout << "Available? " << _employeeAvail[i].checkAvailable(slots[s].getId()) << endl;
-        }
-    }
 }

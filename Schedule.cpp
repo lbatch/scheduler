@@ -95,7 +95,7 @@ void Schedule::writeToFile()
             for(auto emp : emps)
             {
                 f << emp.getId() << ": " << emp.getName() << endl;
-            }
+	    }
             f << endl;
         }
     }
